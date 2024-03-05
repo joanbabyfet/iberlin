@@ -33,7 +33,7 @@ onMounted(() => {
 
 //获取新闻列表
 const getNews = async () => {
-    await nextTick()
+    await nextTick() //防止刷新页面时获取不到数据
     const { data, error } = await useFetch('/v1/example/index', {
         baseURL: config.public.BASE_URL,
         method: 'GET',
@@ -41,7 +41,19 @@ const getNews = async () => {
             params: `{"page":${page.value},"page_size":10}`
         },
     })
-    news.value = data.value
+    if (error.value) {
+        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })  
+    }
+    if(!data.value) {
+        console.log('error')
+    }
+    else if(data.value.code === 0) {
+        console.log(data.value.msg)
+        news.value = data.value
+    }
+    else {
+        console.log(data.value.msg)
+    }
 }
 
 const click = () => {
