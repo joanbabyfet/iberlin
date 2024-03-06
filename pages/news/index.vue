@@ -7,12 +7,12 @@
                 <div class="newsList">
                     <ul>
                         <li v-for="item in news?.data.list" :key="item.id">
-                            <NuxtLink :to="`/news/${item.id}`">{{ item.name }}</NuxtLink>
+                            <NuxtLink :to="localePath(`/news/${item.id}`)">{{ item.name }}</NuxtLink>
                         </li>
                     </ul>
                 </div>
                 <div class="pageNumber">
-                    <UPagination @click="click" v-model="page" :page-count="10" :total="news?.data.count" />
+                    <UPagination @click="click" v-model="page" :page-count="10" :total="count" />
                 </div>
             </div>
         </div>
@@ -25,6 +25,8 @@
 const config = useRuntimeConfig()
 const page = ref(1)
 const news = ref(null)
+const count = ref(0)
+const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 
 onMounted(() => {
     //console.log('onMounted')
@@ -42,7 +44,7 @@ const getNews = async () => {
         },
     })
     if (error.value) {
-        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })  
+        console.log(error.value)
     }
     if(!data.value) {
         console.log('error')
@@ -50,6 +52,7 @@ const getNews = async () => {
     else if(data.value.code === 0) {
         console.log(data.value.msg)
         news.value = data.value
+        count.value = data.value.data.count
     }
     else {
         console.log(data.value.msg)

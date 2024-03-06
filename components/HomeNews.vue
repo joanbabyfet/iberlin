@@ -4,10 +4,10 @@
         <img src="/images/homeNewsTitle.jpg" width="201" height="19" />
         <ul>
             <li v-for="item in news?.data.list" :key="item.id">
-                <NuxtLink :to="`/news/${item.id}`">{{ item.name }}</NuxtLink>
+                <NuxtLink :to="localePath(`/news/${item.id}`)">{{ item.name }}</NuxtLink>
             </li>
         </ul>
-        <div class="more"><NuxtLink to="/news"><img src="/images/iconNewsMore.gif" alt="more" width="34" height="10" border="0" /></NuxtLink></div>
+        <div class="more"><NuxtLink :to="localePath('/news')"><img src="/images/iconNewsMore.gif" alt="more" width="34" height="10" border="0" /></NuxtLink></div>
     </div>
 </template>
 
@@ -15,6 +15,7 @@
 //获取配置
 const config = useRuntimeConfig()
 const news = ref(null)
+const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 
 onMounted(() => {
     //console.log('onMounted')
@@ -32,7 +33,7 @@ const getNews = async () => {
         },
     })
     if (error.value) {
-        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })  
+        console.log(error.value) 
     }
     if(!data.value) {
         console.log('error')

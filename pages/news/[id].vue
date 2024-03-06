@@ -41,7 +41,7 @@ const getNewsInfo = async () => {
         },
     })
     if (error.value) {
-        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })  
+        console.log(error.value)
     }
     if(!data.value) {
         console.log('error')

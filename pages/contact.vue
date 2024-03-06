@@ -5,7 +5,7 @@
       <div id="innerBodyMain">
       <div class="mainTitle titleBrand"><img src="/images/visual/pageTitle/contactUS.png" width="200" height="35" /></div>
       <div id="subMenu">
-        <div id="innerSubMenu">Information<span class="side">&nbsp;</span><NuxtLink to="/contact_form">Contact US Form</NuxtLink></div>
+        <div id="innerSubMenu">Information<span class="side">&nbsp;</span><NuxtLink :to="localePath('/contact_form')">{{ $t('contact_form') }}</NuxtLink></div>
       </div>
       <div id="mainContents">
         <h2> Information </h2>
@@ -27,3 +27,7 @@
   <div id="mainFooterSide"></div>
   </div>
 </template>
+
+<script setup>
+const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
+</script>

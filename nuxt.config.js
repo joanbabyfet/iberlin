@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: { // public 下的变量可以在客户端和服务端使用
       BASE_URL: '', //全局api域名
+      MAINTENANCE_MODE: false //是否维护中
     },
   },
   app: {
@@ -36,9 +37,35 @@ export default defineNuxtConfig({
     //'@/assets/form.css'
   ],
   modules: [
-    'nuxt-swiper', '@nuxt/ui'
+    'nuxt-swiper', '@nuxt/ui', '@nuxtjs/i18n'
   ],
   swiper: {
       modules: ['navigation', 'pagination', 'effect-creative' ]
+  },
+  //多语言
+  i18n: {
+    strategy: 'prefix', //路由是否加上语言前缀 http://localhost:3000/zh/
+    langDir: 'locales', //语言包目录
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en.js'
+      },
+      {
+        code: 'zh',
+        iso: 'zh-TW',
+        file: 'zh.js'
+      }
+    ],
+    defaultLocale: 'en', //默认语言
+    detectBrowserLanguage: { //是否自动检查用户浏览器语言
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    },
+    compilation: {
+      strictMessage: false, //关闭语言包里用html tag报错
+    },
   }
 })

@@ -5,11 +5,11 @@
       <div id="innerBodyMain">
         <div class="mainTitle titleBrand"><img src="/images/visual/pageTitle/contactUS.png" width="200" height="35" /></div>
         <div id="subMenu">
-          <div id="innerSubMenu"><NuxtLink to="contact">Information</NuxtLink><span class="side">&nbsp;</span>Contact US Form</div>
+          <div id="innerSubMenu"><NuxtLink :to="localePath('/contact')">Information</NuxtLink><span class="side">&nbsp;</span>Contact US Form</div>
         </div>
         <div id="mainContents">
           <h2> Contact US Form</h2>
-          <UForm class="space-y-4" @submit="submit">
+          <UForm :state="form" class="space-y-4" @submit="submit">
             <UFormGroup label="Contact window" name="name">
               <UInput v-model="form.name" placeholder="Enter Contact window" required />
             </UFormGroup>
@@ -36,7 +36,7 @@
 <script setup>
 //获取配置
 const config = useRuntimeConfig()
-
+const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 const form = ref({
   name: '',
   mobile: '',
