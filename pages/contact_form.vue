@@ -45,7 +45,6 @@ const form = ref({
 })
 
 const submit = async() => {
-  //console.log('submit')
   const { data } = await useFetch('/v1/example/edit', {
     baseURL: config.public.BASE_URL,
     method: 'POST',
@@ -53,11 +52,10 @@ const submit = async() => {
       params: JSON.stringify(form.value)
     },
   })
-  if (data) {
-    console.log(data.value)
-  }
-  else {
-    console.log('Contact form could not be send')
+  if (error.value) {
+      throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })
+      //以下方式不会跳转到错误页 error.vue
+      //throw createError({statusCode: 404, statusMessage: "Page not found.", fatal: true})
   }
 }
 </script>

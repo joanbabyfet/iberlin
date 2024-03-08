@@ -8,11 +8,11 @@
           <div id="HeaderNavIdx">
             <div id="innerHeaderNavIdx">
               <ul>
-                <li><NuxtLink :to="localePath('/about')" class="current">{{ $t('nav.about') }}</NuxtLink></li>
-                <li><NuxtLink :to="localePath('/news')">{{ $t('nav.news') }}</NuxtLink></li>
-                <li><NuxtLink :to="localePath('/application')">{{ $t('nav.application') }}</NuxtLink></li>
-                <li><NuxtLink :to="localePath('/products')">{{ $t('nav.products') }}</NuxtLink></li>
-                <li class="navEnd"><NuxtLink :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
+                <li><NuxtLink :to="localePath('/about')" activeClass="current">{{ $t('nav.about') }}</NuxtLink></li>
+                <li><NuxtLink :to="localePath('/news')" activeClass="current">{{ $t('nav.news') }}</NuxtLink></li>
+                <li><NuxtLink :to="localePath('/application')" activeClass="current">{{ $t('nav.application') }}</NuxtLink></li>
+                <li><NuxtLink :to="localePath('/products')" activeClass="current">{{ $t('nav.products') }}</NuxtLink></li>
+                <li class="navEnd"><NuxtLink :to="localePath('/contact')" activeClass="current">{{ $t('nav.contact') }}</NuxtLink></li>
               </ul>
             </div>
           </div>
