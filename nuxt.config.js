@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true, //开启服务器端渲染(预渲染)
   devServer: {
-    host: 'localhost', //默认为localhost
+    host: '127.0.0.1', //默认为localhost
     port: 3001
   },
   runtimeConfig: {
