@@ -5,8 +5,8 @@
             <div id="innerBodyMain">
                 <div class="mainTitle titleBrand"><img src="/images/visual/pageTitle/news.png" width="200" height="35" /></div>
                 <div id="mainContents">
-                    <h2>{{ info?.data.name }}</h2>
-                    <p>{{ info?.data.content }}</p>
+                    <h2>{{ info.name }}</h2>
+                    <p>{{ info.content }}</p>
                     <div class="files">
                         <ul>
                         </ul>
@@ -19,32 +19,6 @@
 </template>
 
 <script setup>
-//获取配置
-const config = useRuntimeConfig()
-const route = useRoute()
-//console.log(route.params)
-const info = ref(null)
-
-onMounted(() => {
-    //console.log('onMounted')
-    getNewsInfo()
-})
-
-//获取新闻详情
-const getNewsInfo = async () => {
-    await nextTick() //防止刷新页面时获取不到数据
-    const { data, error } = await useFetch('/v1/example/show', {
-        baseURL: config.public.BASE_URL,
-        method: 'GET',
-        params: {
-            params: `{"id": ${route.params.id}}`
-        },
-    })
-    if (error.value) {
-        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })
-        //以下方式不会跳转到错误页 error.vue
-        //throw createError({statusCode: 404, statusMessage: "Page not found.", fatal: true})
-    }
-    info.value = data.value
-}
+//頁面使用組合函数
+const { info } = useNewsInfo()
 </script>

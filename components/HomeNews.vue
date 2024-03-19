@@ -3,8 +3,8 @@
         <img src="/images/titleTxNews.jpg" width="273" height="37" style="margin-bottom:14px;" />
         <img src="/images/homeNewsTitle.jpg" width="201" height="19" />
         <ul>
-            <li v-for="item in news?.data.list" :key="item.id">
-                <NuxtLink :to="localePath(`/news/${item.id}`)">{{ item.name }}</NuxtLink>
+            <li v-for="item in list" :key="item.id">
+                <NuxtLink :to="localePath(`/news/${item.id}`)">{{ sliceWord(item.name, 20) }}</NuxtLink>
             </li>
         </ul>
         <div class="more"><NuxtLink :to="localePath('/news')"><img src="/images/iconNewsMore.gif" alt="more" width="34" height="10" border="0" /></NuxtLink></div>
@@ -12,31 +12,8 @@
 </template>
 
 <script setup>
-//获取配置
-const config = useRuntimeConfig()
-const news = ref(null)
 const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 
-onMounted(() => {
-    //console.log('onMounted')
-    getNews()
-})
-
-//获取首页新闻列表
-const getNews = async () => {
-    await nextTick() //防止刷新页面时获取不到数据
-    const { data, error } = await useFetch('/v1/example/index', {
-        baseURL: config.public.BASE_URL,
-        method: 'GET',
-        params: {
-            params: `{"page":1,"page_size":5}`
-        },
-    })
-    if (error.value) {
-        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })
-        //以下方式不会跳转到错误页 error.vue
-        //throw createError({statusCode: 404, statusMessage: "Page not found.", fatal: true})
-    }
-    news.value = data.value
-}
+//頁面使用組合函数
+const { list } = useHomeNews()
 </script>

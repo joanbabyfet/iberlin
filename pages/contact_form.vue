@@ -34,28 +34,8 @@
 </template>
 
 <script setup>
-//获取配置
-const config = useRuntimeConfig()
 const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
-const form = ref({
-  name: '',
-  mobile: '',
-  email: '',
-  content: '',
-})
 
-const submit = async() => {
-  const { data } = await useFetch('/v1/example/edit', {
-    baseURL: config.public.BASE_URL,
-    method: 'POST',
-    body: {
-      params: JSON.stringify(form.value)
-    },
-  })
-  if (error.value) {
-      throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })
-      //以下方式不会跳转到错误页 error.vue
-      //throw createError({statusCode: 404, statusMessage: "Page not found.", fatal: true})
-  }
-}
+//頁面使用組合函数
+const { form, submit } = useContactForm()
 </script>
