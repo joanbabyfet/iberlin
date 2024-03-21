@@ -1,29 +1,41 @@
 import { getNews } from '../api/index'
 
 export default function() {
-    const list = ref([])
+    const list = ref([]) 
     const total = ref(0) //总条数
     const currentPage = ref(1) //第几页
     const pageSize = ref(10) //每页显示几条
-
-    function getList() {
+    
+    async function getList() {
         let data = {
             'page': currentPage.value,
             'page_size': pageSize.value,
         }
-        getNews({ params: JSON.stringify(data) }).then(res => {
-            list.value = res.list
-            total.value = res.count
-        }).catch((err)=>{
-            console.log(err)
+        await getNews({ params: JSON.stringify(data) }).then((res) => {
+            //console.log(res.data)
+            if(res.code === 0) {
+                list.value = res.data.list
+                total.value = res.data.count
+            }
+        }).catch(error => {
+            //console.log(error)
+            ElMessage.error(error)
         })
     }
-    
+
     onMounted(() => {
         getList()
     })
 
-    const click = () => {
+    const handleCurrentChange = (val) => {
+        console.log(`current page: ${val}`)
+        currentPage.value = val
+        getList()
+    }
+
+    const handleSizeChange = (val) => {
+        console.log(`${val} items per page`)
+        pageSize.value = val
         getList()
     }
 
@@ -32,6 +44,7 @@ export default function() {
         total,
         currentPage,
         pageSize,
-        click
+        handleCurrentChange,
+        handleSizeChange
     }
 }

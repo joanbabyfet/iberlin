@@ -35,10 +35,11 @@ export default defineNuxtConfig({
   //全局引入css文件
   css: [
     '@/assets/css/style.css',
-    //'@/assets/css/form.css'
+    //'@/assets/css/form.css',
+    'element-plus/dist/index.css'
   ],
   modules: [
-    'nuxt-swiper', '@nuxt/ui', '@nuxtjs/i18n'
+    'nuxt-swiper', '@nuxtjs/i18n', '@element-plus/nuxt'
   ],
   swiper: {
       modules: ['navigation', 'pagination', 'effect-creative' ]

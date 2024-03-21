@@ -11,9 +11,16 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pageNumber">
-                    <UPagination @click="click" v-model="currentPage" :page-count="pageSize" :total="total" />
-                </div>
+                <el-pagination
+                    v-model:current-page="currentPage"
+                    v-model:page-size="pageSize"
+                    :total="total"
+                    :page-sizes="[10, 20, 30, 40]"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    @current-change="handleCurrentChange"
+                    @size-change="handleSizeChange"
+                    >
+                </el-pagination>
             </div>
         </div>
         <div id="mainFooterSide"></div>
@@ -24,5 +31,5 @@
 const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 
 //頁面使用組合函数
-const { list, total, currentPage, pageSize, click } = useNews()
+const { list, total, currentPage, pageSize, handleCurrentChange, handleSizeChange } = useNews()
 </script>

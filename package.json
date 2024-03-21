@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.14.1",
+    "element-plus": "^2.6.1",
     "nprogress": "^0.2.0",
     "nuxt": "^3.10.3",
     "nuxt-swiper": "^1.2.2",
@@ -19,6 +20,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.7",
     "@nuxtjs/i18n": "^8.0.0"
   }
 }

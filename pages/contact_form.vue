@@ -9,23 +9,23 @@
         </div>
         <div id="mainContents">
           <h2> Contact US Form</h2>
-          <UForm :state="form" class="space-y-4" @submit="submit">
-            <UFormGroup label="Contact window" name="name">
-              <UInput v-model="form.name" placeholder="Enter Contact window" required />
-            </UFormGroup>
-            <UFormGroup label="Phone no" name="mobile">
-              <UInput v-model="form.mobile" placeholder="Enter Phone no" required />
-            </UFormGroup>
-            <UFormGroup label="Email" name="email">
-              <UInput v-model="form.email" placeholder="Enter Email" required />
-            </UFormGroup>
-            <UFormGroup label="Message" name="content">
-              <UTextarea v-model="form.content" placeholder="Enter Message" required />
-            </UFormGroup>
-            <UButton type="submit">
-              Submit
-            </UButton>
-          </UForm>
+          <el-form ref="contactForm" :model="form" :rules="rules" label-width="130px">
+            <el-form-item label="Contact window" prop="name">
+              <el-input v-model="form.name" placeholder="Enter Contact window"></el-input>
+            </el-form-item>
+            <el-form-item label="Phone no" prop="mobile">
+              <el-input v-model="form.mobile" placeholder="Enter Phone no"></el-input>
+            </el-form-item>
+            <el-form-item label="Email" prop="email">
+              <el-input v-model="form.email" placeholder="Enter Email"></el-input>
+            </el-form-item>
+            <el-form-item label="Message" prop="content">
+              <el-input type="textarea" v-model="form.content" placeholder="Enter Message"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm">Submit</el-button>
+            </el-form-item>
+          </el-form>
         </div>
       </div>
     </div>
@@ -37,5 +37,5 @@
 const localePath = useLocalePath(); //根据当前语言解析路由 /about to /zh/about
 
 //頁面使用組合函数
-const { form, submit } = useContactForm()
+const { contactForm, form, submitForm, rules } = useContactForm()
 </script>
