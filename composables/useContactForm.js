@@ -18,12 +18,15 @@ export default function() {
         { type: 'email', message: '邮箱格式错误', trigger: ['blur']}],
         content: [{ required: true, message: 'Enter Message', trigger: ['blur']}],
     }
+    const isDisabled = ref(false) //禁用按钮避免重复提交
 
     const submitForm = () => {
-        contactForm.value.validate(async (valid) => {
+        isDisabled.value = true
+        contactForm.value.validate((valid) => {
             if(valid) {
                 //发送请求
                 submitContactForm({ params: form.value }).then(res => {
+                    isDisabled.value = false
                     if(res.code === 0) {
                         ElMessage.success(res.msg)
                         //重置表单
@@ -34,7 +37,12 @@ export default function() {
                     }
                 }).catch((error)=>{
                     ElMessage.error(error)
+                    isDisabled.value = false
                 })
+            }
+            else {
+                isDisabled.value = false
+                return false
             }
         })
     }
@@ -43,6 +51,7 @@ export default function() {
         contactForm,
         form,
         submitForm,
-        rules
+        rules,
+        isDisabled
     }
 }

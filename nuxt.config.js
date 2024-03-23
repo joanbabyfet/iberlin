@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
   //全局引入插件
   plugins: [
-    { src: '@/plugins/router-nprogress.js', mode: 'client'}
+    { src: '@/plugins/router-nprogress.js', mode: 'client'},
   ],
   //全局引入css文件
   css: [
