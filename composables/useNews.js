@@ -11,11 +11,11 @@ export default function() {
             'page': currentPage.value,
             'page_size': pageSize.value,
         }
-        await getNews({ params: JSON.stringify(data) }).then((res) => {
+        await getNews(data).then((res) => {
             //console.log(res.data)
             if(res.code === 0) {
                 list.value = res.data.list
-                total.value = res.data.count
+                total.value = res.data.total
             }
         }).catch(error => {
             //console.log(error)

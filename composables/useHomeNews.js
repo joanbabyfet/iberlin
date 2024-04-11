@@ -8,7 +8,7 @@ export default function() {
             'page': 1,
             'page_size': 5,
         }
-        getNews({ params: JSON.stringify(data) }).then(res => {
+        getNews(data).then(res => {
             if(res.code === 0) {
                 list.value = res.data.list
             }

@@ -1,4 +1,5 @@
 import { submitContactForm } from '../api/index'
+import qs from 'qs'
 
 export default function() {
     //定义表单绑定的ref
@@ -25,7 +26,11 @@ export default function() {
         contactForm.value.validate((valid) => {
             if(valid) {
                 //发送请求
-                submitContactForm({ params: form.value }).then(res => {
+                const headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                var postdata = qs.stringify(form.value)
+                submitContactForm(postdata, headers).then(res => {
                     isDisabled.value = false
                     if(res.code === 0) {
                         ElMessage.success(res.msg)

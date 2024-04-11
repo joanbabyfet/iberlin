@@ -4,7 +4,7 @@
         <img src="/images/homeNewsTitle.jpg" width="201" height="19" />
         <ul>
             <li v-for="item in list" :key="item.id">
-                <NuxtLink :to="localePath(`/news/${item.id}`)">{{ sliceWord(item.name, 20) }}</NuxtLink>
+                <NuxtLink :to="localePath(`/news/${item.id}`)">{{ sliceWord(item.title, 20) }}</NuxtLink>
             </li>
         </ul>
         <div class="more"><NuxtLink :to="localePath('/news')"><img src="/images/iconNewsMore.gif" alt="more" width="34" height="10" border="0" /></NuxtLink></div>
