@@ -1,14 +1,13 @@
-import { getNews } from '../api/index'
+import { getHomeNews } from '../api/index'
 
 export default function() {
     const list = ref([]) 
 
     function getList() {
         let data = {
-            'page': 1,
-            'page_size': 5,
+            'limit': 5,
         }
-        getNews(data).then(res => {
+        getHomeNews(data).then(res => {
             if(res.code === 0) {
                 list.value = res.data.list
             }
