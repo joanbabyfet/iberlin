@@ -6,7 +6,7 @@
                 <div class="mainTitle titleBrand"><img src="/images/visual/pageTitle/news.png" width="200" height="35" /></div>
                 <div id="mainContents">
                     <h2>{{ info.title }}</h2>
-                    <div v-html:="info.content"></div>
+                    <div v-html="content"></div>
                     <div class="files">
                         <ul>
                         </ul>
@@ -20,5 +20,5 @@
 
 <script setup>
 //頁面使用組合函数
-const { info } = useNewsInfo()
+const { info, content } = useNewsInfo()
 </script>
